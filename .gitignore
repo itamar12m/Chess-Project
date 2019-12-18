@@ -1,0 +1,11 @@
+*.vs/
+*.rar
+*.zip
+*.pdf
+*.pdb
+*.ilk
+*.exe
+*.tlog
+*.log
+*.idb
+*.obj
