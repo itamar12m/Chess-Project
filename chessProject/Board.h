@@ -18,5 +18,7 @@ public:
 	void init(string boardStr);
 	void move(string indexes);
 	Piece* getPiece(char letter, char num);
-
+	void changeTurn();
+	bool isCheck();
+	~Board();
 };
