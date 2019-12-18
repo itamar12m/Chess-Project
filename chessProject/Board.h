@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include "Piece.h"
+#include "Rook.h"
+#include "King.h"
+#include "Queen.h"
 
 using std::string;
 using std::cout;

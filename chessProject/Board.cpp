@@ -12,15 +12,19 @@ Board::Board(string boardStr)
 
 void Board::init(string boardStr)
 {
-	for (size_t i = 0; i < 64; i++)
+	for (size_t i = 0; i < 8; i++)
 	{
-		switch (boardStr[i])
+		for (size_t j = 0; j < 8; j++)
 		{
-		case 'r' || 'R':
-			this->_board[i] = new Rook();
-		default:
-			break;
+			switch (boardStr[i*8 + j])
+			{
+			case 'r' || 'R':
+				this->_board[i][j] = new Rook();
+			default:
+				break;
+			}
 		}
+		
 	}
 }
 
