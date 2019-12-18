@@ -17,6 +17,6 @@ public:
 	Board(string boardStr);
 	void init(string boardStr);
 	void move(string indexes);
-	//Piece* operator[][](char letter, char num);
+	Piece* getPiece(char letter, char num);
 
 };
