@@ -6,7 +6,6 @@ in order to read and write information from and to the Backend
 
 #include "Pipe.h"
 #include <iostream>
-#include <thread>
 
 using std::cout;
 using std::endl;
