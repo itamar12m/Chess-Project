@@ -2,6 +2,11 @@
 #include <iostream>
 #include "Piece.h"
 #include "Bishop.h"
+#include "King.h"
+#include "Queen.h"
+#include "Rook.h"
+#include "Pawn.h"
+#include "Knight.h"
 
 using std::string;
 using std::cout;
