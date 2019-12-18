@@ -21,9 +21,16 @@
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />
+<<<<<<< HEAD
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Pawn.h" />
+=======
+    <ClInclude Include="King.h" />
+    <ClInclude Include="Piece.h" />
+>>>>>>> 43b9128a86ec5fbf0a36844798f799b164b3d235
     <ClInclude Include="Pipe.h" />
+    <ClInclude Include="Queen.h" />
+    <ClInclude Include="Rook.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

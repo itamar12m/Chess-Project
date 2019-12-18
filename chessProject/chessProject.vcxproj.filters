@@ -27,6 +27,7 @@
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Bishop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -34,6 +35,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pawn.h">
+=======
+    <ClInclude Include="Piece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Queen.h">
+>>>>>>> 43b9128a86ec5fbf0a36844798f799b164b3d235
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
