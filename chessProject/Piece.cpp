@@ -13,7 +13,7 @@ Piece::~Piece()
 {
 }
 
-int Piece::checkVallid(string toMove)
+int Piece::checkValid(string toMove)
 {
 	return 0;
 }
