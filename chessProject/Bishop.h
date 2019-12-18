@@ -6,4 +6,3 @@ class Bishop : public Piece
 {
 
 };
-
