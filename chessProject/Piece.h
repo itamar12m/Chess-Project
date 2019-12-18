@@ -15,7 +15,7 @@ public:
 
 protected:
 	//metod:
-	int checkVallid(string toMove);
+	int checkValid(string toMove);
 
 	//fildes:
 	bool _color;

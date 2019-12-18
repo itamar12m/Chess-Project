@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Piece.h"
 
 using std::string;
 using std::cout;
@@ -11,12 +12,14 @@ class Board
 {
 protected:
 	Piece* _board[8][8];
-	bool turn;
+	bool _turn;
 public:
 	Board();
 	Board(string boardStr);
 	void init(string boardStr);
 	void move(string indexes);
 	Piece* getPiece(char letter, char num);
-
+	void changeTurn();
+	bool isCheck();
+	~Board();
 };
