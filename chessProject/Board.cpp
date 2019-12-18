@@ -19,7 +19,7 @@ void Board::init(string boardStr)
 			switch (boardStr[i*8 + j])
 			{
 			case 'r' || 'R':
-				this->_board[i][j] = new Rook();
+				//this->_board[i][j] = new Rook();
 			default:
 				break;
 			}

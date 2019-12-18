@@ -21,26 +21,6 @@ void main()
 
 	Pipe p;
 	bool isConnect = p.connect();
-	
-	string ans;
-	while (!isConnect)
-	{
-		cout << "cant connect to graphics" << endl;
-		cout << "Do you try to connect again or exit? (0-try again, 1-exit)" << endl;
-		std::cin >> ans;
-
-		if (ans == "0")
-		{
-			cout << "trying connect again.." << endl;
-			Sleep(2000);
-			isConnect = p.connect();
-		}
-		else 
-		{
-			p.close();
-			return;
-		}
-	}
 
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
