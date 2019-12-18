@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Piece.h"
+#include "Bishop.h"
 
 using std::string;
 using std::cout;
@@ -8,6 +9,7 @@ using std::cin;
 using std::endl;
 
 class Piece;
+
 class Board
 {
 protected:
