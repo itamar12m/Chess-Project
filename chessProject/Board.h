@@ -1,12 +1,6 @@
 #pragma once
 #include <iostream>
-#include "Piece.h"
-#include "Bishop.h"
-#include "King.h"
-#include "Queen.h"
-#include "Rook.h"
-#include "Pawn.h"
-#include "Knight.h"
+#include "stdafx.h"
 
 using std::string;
 using std::cout;
@@ -17,7 +11,7 @@ class Piece;
 
 class Board
 {
-protected:
+private:
 	Piece* _board[8][8];
 	bool _turn;
 public:
