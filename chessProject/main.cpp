@@ -6,13 +6,14 @@ in order to read and write information from and to the Backend
 
 #include "Pipe.h"
 #include <iostream>
+#include "Board.h"
 
 using std::cout;
 using std::endl;
 using std::string;
 
 
-void main()
+int main()
 {
 	srand(time_t(NULL));
 
@@ -56,4 +57,6 @@ void main()
 	}
 
 	p.close();
+
+	return 0;
 }

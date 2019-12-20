@@ -1,4 +1,6 @@
 #include "Board.h"
+#define BLACK true
+#define WHITE false
 
 Board::Board()
 {
@@ -8,6 +10,7 @@ Board::Board()
 
 Board::Board(string boardStr)
 {
+	this->init(boardStr);
 }
 
 void Board::init(string boardStr)
@@ -17,34 +20,40 @@ void Board::init(string boardStr)
 		for (size_t j = 0; j < 8; j++)
 		{
 			switch (boardStr[i*8 + j])
-			{/*
+			{
 			case 'r':
+				this->_board[i][j] = new Rook(BLACK, this);
 			case 'R':
-				this->_board[i][j] = new Rook();
-				break;
+				this->_board[i][j] = new Rook(WHITE, this);
+				break;/*
 			case 'n':
+				this->_board[i][j] = new Knight(BLACK, this);
 			case 'N':
-				this->_board[i][j] = new Knight();
+				this->_board[i][j] = new Knight(WHITE, this);
 				break;
 			case 'B':
+				this->_board[i][j] = new Bishop(BLACK, this);
 			case 'b':
-				this->_board[i][j] = new Bishop();
+				this->_board[i][j] = new Bishop(WHITE, this);
 				break;
 			case 'k':
+				this->_board[i][j] = new King(BLACK, this);
 			case 'K':
-				this->_board[i][j] = new King();
+				this->_board[i][j] = new King(WHITE, this);
 				break;
 			case 'q':
+				this->_board[i][j] = new Queen(BLACK, this);
 			case 'Q':
-				this->_board[i][j] = new Queen();
+				this->_board[i][j] = new Queen(WHITE, this);
 				break;
 			case 'P':
+				this->_board[i][j] = new Pawn(BLACK, this);
 			case 'p':
-				this->_board[i][j] = new Pawn();
-				break;*/
+				this->_board[i][j] = new Pawn(WHITE, this);
+				break;
 			case '#':
 				this->_board[i][j] = nullptr;
-				break;
+				break;*/
 			default:
 				// error
 				break;
@@ -58,9 +67,11 @@ void Board::move(string indexes)
 {
 }
 
-Piece* Board::getPiece(char letter, char num)
+Piece*& Board::getPiece(char letter, char num)
 {
-	return nullptr;
+	int firstIndex = letter - 'a';
+	int secondIndex = '0' + 8 - num;
+	return this->_board[firstIndex][secondIndex];
 }
 
 void Board::changeTurn()

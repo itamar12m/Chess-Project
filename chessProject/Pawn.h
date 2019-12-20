@@ -5,5 +5,5 @@ class Pawn : public Piece
 {
 public:
 	bool checkFirst();
-
+	virtual int move(string indexes);
 };

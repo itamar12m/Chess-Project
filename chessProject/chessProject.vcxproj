@@ -136,10 +136,15 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Queen.cpp" />
+    <ClCompile Include="Rook.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

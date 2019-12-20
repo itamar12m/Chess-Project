@@ -9,14 +9,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <iostream>
 
-#include "Piece.h"
-#include "Bishop.h"
-#include "King.h"
-#include "Queen.h"
-#include "Rook.h"
-#include "Pawn.h"
-#include "Knight.h"
-
+using std::string;
 
 // TODO: reference additional headers your program requires here

@@ -3,5 +3,6 @@
 
 class Knight : public Piece
 {
-
+public:
+	virtual int move(string indexes);
 };

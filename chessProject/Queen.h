@@ -3,5 +3,6 @@
 
 class Queen : public Piece
 {
-
+public:
+	virtual int move(string indexes);
 };

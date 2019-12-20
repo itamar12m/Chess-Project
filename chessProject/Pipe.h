@@ -57,6 +57,7 @@ public:
 	Pipe()
 	{
 		// Prepare the pipe name
+		hPipe = nullptr;
 		strPipeName  = (LPTSTR)TEXT("\\\\.\\pipe\\chessPipe");
 	}
 
