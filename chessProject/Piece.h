@@ -22,6 +22,8 @@ public:
 	Piece(bool color, Board* board);
 	virtual int move(string indexes) = 0;
 	bool getColor();
+	static int checkWayForRook(string indexes, Board* board);
+	static int checkWayForBishop(string indexes, Board* board);
 	virtual ~Piece();
 
 protected:

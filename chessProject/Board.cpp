@@ -66,12 +66,14 @@ void Board::init(string boardStr)
 			case 'K':
 				this->_board[i][j] = new King(WHITE, this);
 				break;
+			*/
 			case 'q':
 				this->_board[i][j] = new Queen(BLACK, this);
 				break;
 			case 'Q':
 				this->_board[i][j] = new Queen(WHITE, this);
 				break;
+			/*
 			case 'p':
 				this->_board[i][j] = new Pawn(BLACK, this);
 				break;
@@ -107,6 +109,7 @@ int Board::move(string indexes)
 	int code = this->getPiece(indexes[0], indexes[1])->move(indexes);
 	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
 	this->getPiece(indexes[0], indexes[1]) = nullptr;
+	return code;
 }
 
 Piece*& Board::getPiece(char letter, char num)
