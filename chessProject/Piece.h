@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "stdafx.h"
 
 #define VALID_MOVE 0
 #define VALID_CHECK_MOVE 1

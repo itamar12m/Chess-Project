@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Pipe.h"
 #include "Bishop.h"
 #include "King.h"
 #include "Queen.h"
@@ -10,17 +11,21 @@
 
 
 using std::string;
+using std::cout;
 
 class Board
 {
 private:
 	Piece* _board[8][8];
 	bool _turn;
+	Pipe p;
 public:
+	string getMessageFromGraphics();
+	void sendMessageToGraphics(string msg);
 	Board();
 	Board(string boardStr);
 	void init(string boardStr);
-	void move(string indexes);
+	int move(string indexes);
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
 	bool isCheck();

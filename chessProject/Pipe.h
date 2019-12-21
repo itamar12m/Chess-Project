@@ -93,10 +93,10 @@ public:
 
 	}
 
-	bool sendMessageToGraphics(char* msg)
+	bool sendMessageToGraphics(const char* msg)
 	{
 		//char ea[] = "SSS";
-		char* chRequest = msg;	// Client -> Server
+		char* chRequest = (char*)msg;	// Client -> Server
 		DWORD cbBytesWritten, cbRequestBytes;
 
 		// Send one message to the pipe.

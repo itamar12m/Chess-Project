@@ -1,16 +1,37 @@
 #include "Board.h"
+
 #define BLACK true
 #define WHITE false
 
+string Board::getMessageFromGraphics()
+{
+	return this->p.getMessageFromGraphics();
+}
+
+void Board::sendMessageToGraphics(string msg)
+{
+	p.sendMessageToGraphics(msg.c_str());
+}
+
 Board::Board()
 {
-	this->init("rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0");
-	
+	string boardStr = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	this->init(boardStr);
+	if (!p.connect())
+	{
+		cout << "Can't connect to the game!\n";
+	}
+	this->p.sendMessageToGraphics(boardStr.c_str());
 }
 
 Board::Board(string boardStr)
 {
 	this->init(boardStr);
+	if (!p.connect())
+	{
+		cout << "Can't connect to the game!\n";
+	}
+	this->p.sendMessageToGraphics(boardStr.c_str());
 }
 
 void Board::init(string boardStr)
@@ -63,19 +84,33 @@ void Board::init(string boardStr)
 	}
 }
 
-void Board::move(string indexes)
+int Board::move(string indexes)
 {
+	if (this->getPiece(indexes[0], indexes[1]) == nullptr)
+	{
+		return INVALID_NO_PIECE_SRC;
+	}
+	if (this->getPiece(indexes[2], indexes[3]) != nullptr)
+	{
+		return INVALID_PIECE_IN_DST;
+	}
+	if (indexes[0] == indexes[2] && indexes[1] == indexes[3])
+	{
+		return INVALID_SAME_DST_SRC;
+	}
+	return this->getPiece(indexes[0], indexes[1])->move(indexes);
 }
 
 Piece*& Board::getPiece(char letter, char num)
 {
-	int firstIndex = letter - 'a';
-	int secondIndex = '0' + 8 - num;
+	int firstIndex = '0' + 8 - num;
+	int secondIndex = letter - 'a';
 	return this->_board[firstIndex][secondIndex];
 }
 
 void Board::changeTurn()
 {
+	this->_turn = this->_turn == WHITE ? this->_turn = BLACK : this->_turn = WHITE;
 }
 
 bool Board::isCheck()
@@ -85,4 +120,5 @@ bool Board::isCheck()
 
 Board::~Board()
 {
+	p.close();
 }
