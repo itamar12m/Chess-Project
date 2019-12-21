@@ -45,7 +45,7 @@ int Piece::checkWayForRook(string indexes, Board* board)
 
 int Piece::checkWayForBishop(string indexes, Board* board)
 {
-	for (int i = 0; i < abs(indexes[0] - indexes[2]); i++)
+	for (int i = 1; i < abs(indexes[0] - indexes[2]); i++)
 	{
 		if (board->getPiece(indexes[2] + (indexes[0] > indexes[2] ? -i : i), indexes[3] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
 		{
