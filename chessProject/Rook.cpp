@@ -1,5 +1,4 @@
 #include "Rook.h"
-#include "Board.h"
 
 Rook::Rook(bool color, Board* board) : Piece(color, board)
 {
@@ -14,7 +13,7 @@ int Rook::move(string indexes)
 	}
 	if (indexes[0] != indexes[2]) // horizontal
 	{
-		difference = abs(int(indexes[2] - indexes[0]));
+		difference = abs((int)(indexes[2] - indexes[0]));
 		for (int i = 1; i < difference; i++)
 		{
 			if (_board->getPiece(indexes[0]+i, indexes[1]) != nullptr)
@@ -25,7 +24,7 @@ int Rook::move(string indexes)
 	}
 	else // vertical
 	{
-		difference = abs(int(indexes[3] - indexes[1]));
+		difference = abs((int)(indexes[3] - indexes[1]));
 		for (int i = 1; i < difference; i++)
 		{
 			if (_board->getPiece(indexes[0], indexes[1] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)

@@ -49,32 +49,38 @@ void Board::init(string boardStr)
 				break;/*
 			case 'n':
 				this->_board[i][j] = new Knight(BLACK, this);
+				break;
 			case 'N':
 				this->_board[i][j] = new Knight(WHITE, this);
+				break;*/
+			case 'b':
+				this->_board[i][j] = new Bishop(BLACK, this);
 				break;
 			case 'B':
-				this->_board[i][j] = new Bishop(BLACK, this);
-			case 'b':
 				this->_board[i][j] = new Bishop(WHITE, this);
 				break;
+				/*
 			case 'k':
 				this->_board[i][j] = new King(BLACK, this);
+				break;
 			case 'K':
 				this->_board[i][j] = new King(WHITE, this);
 				break;
 			case 'q':
 				this->_board[i][j] = new Queen(BLACK, this);
+				break;
 			case 'Q':
 				this->_board[i][j] = new Queen(WHITE, this);
 				break;
-			case 'P':
-				this->_board[i][j] = new Pawn(BLACK, this);
 			case 'p':
-				this->_board[i][j] = new Pawn(WHITE, this);
+				this->_board[i][j] = new Pawn(BLACK, this);
 				break;
+			case 'P':
+				this->_board[i][j] = new Pawn(WHITE, this);
+				break;*/
 			case '#':
 				this->_board[i][j] = nullptr;
-				break;*/
+				break;
 			default:
 				// error
 				break;
@@ -120,7 +126,7 @@ bool Board::isCheck()
 	{
 		for (size_t j = 0; j < 8; j++)
 		{
-			
+			// ...
 		}
 	}
 	return false;
