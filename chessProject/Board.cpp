@@ -104,7 +104,9 @@ int Board::move(string indexes)
 	{
 		return INVALID_SAME_DST_SRC;
 	}
-	return this->getPiece(indexes[0], indexes[1])->move(indexes);
+	int code = this->getPiece(indexes[0], indexes[1])->move(indexes);
+	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
+	this->getPiece(indexes[0], indexes[1]) = nullptr;
 }
 
 Piece*& Board::getPiece(char letter, char num)

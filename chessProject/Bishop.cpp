@@ -10,7 +10,5 @@ int Bishop::move(string indexes)
 	{
 		return INVALID_PIECE_MOVE;
 	}
-	this->_board->getPiece(indexes[2], indexes[3]) = this->_board->getPiece(indexes[0], indexes[1]);
-	this->_board->getPiece(indexes[0], indexes[1]) = nullptr;
 	return VALID_MOVE;
 }

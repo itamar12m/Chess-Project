@@ -38,7 +38,5 @@ int Rook::move(string indexes)
 			}
 		}
 	}
-	_board->getPiece(indexes[2], indexes[3]) = _board->getPiece(indexes[0], indexes[1]);
-	_board->getPiece(indexes[0], indexes[1]) = nullptr;
 	return VALID_MOVE;
 }

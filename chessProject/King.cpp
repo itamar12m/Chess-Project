@@ -1,6 +1,6 @@
 #include "King.h"
 
-King::King(bool color, Board* board) :Piece(color, board)
+King::King(bool color, Board* board) : Piece(color, board)
 {
 }
 
