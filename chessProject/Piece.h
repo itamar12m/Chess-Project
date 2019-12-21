@@ -4,7 +4,7 @@
 
 #define VALID_MOVE 0
 #define VALID_CHECK_MOVE 1
-#define INVALID_NO_PIECE_SRC 2
+#define INVALID_NOT_PLAYER_PIECE_SRC 2
 #define INVALID_PIECE_IN_DST 3
 #define INVALID_SELF_CHECK_MOVE 4
 #define INVALID_INDEXES 5
@@ -21,6 +21,7 @@ class Piece
 public:
 	Piece(bool color, Board* board);
 	virtual int move(string indexes) = 0;
+	bool getColor();
 	virtual ~Piece();
 
 protected:

@@ -1,8 +1,5 @@
 #include "Board.h"
 
-#define BLACK true
-#define WHITE false
-
 string Board::getMessageFromGraphics()
 {
 	return this->p.getMessageFromGraphics();
@@ -16,6 +13,7 @@ void Board::sendMessageToGraphics(string msg)
 Board::Board()
 {
 	string boardStr = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	this->_turn = WHITE;
 	this->init(boardStr);
 	if (!p.connect())
 	{
@@ -26,6 +24,7 @@ Board::Board()
 
 Board::Board(string boardStr)
 {
+	this->_turn = WHITE;
 	this->init(boardStr);
 	if (!p.connect())
 	{
@@ -44,6 +43,7 @@ void Board::init(string boardStr)
 			{
 			case 'r':
 				this->_board[i][j] = new Rook(BLACK, this);
+				break;
 			case 'R':
 				this->_board[i][j] = new Rook(WHITE, this);
 				break;/*
@@ -86,11 +86,11 @@ void Board::init(string boardStr)
 
 int Board::move(string indexes)
 {
-	if (this->getPiece(indexes[0], indexes[1]) == nullptr)
+	if (this->getPiece(indexes[0], indexes[1]) == nullptr || this->getPiece(indexes[0], indexes[1])->getColor() != this->_turn)
 	{
-		return INVALID_NO_PIECE_SRC;
+		return INVALID_NOT_PLAYER_PIECE_SRC;
 	}
-	if (this->getPiece(indexes[2], indexes[3]) != nullptr)
+	if (this->getPiece(indexes[2], indexes[3]) != nullptr && this->getPiece(indexes[2], indexes[3])->getColor() == this->_turn)
 	{
 		return INVALID_PIECE_IN_DST;
 	}
@@ -115,6 +115,14 @@ void Board::changeTurn()
 
 bool Board::isCheck()
 {
+	Board test(*this); // creating another board to check on it if this is check..
+	for (size_t i = 0; i < 8; i++)
+	{
+		for (size_t j = 0; j < 8; j++)
+		{
+			
+		}
+	}
 	return false;
 }
 
