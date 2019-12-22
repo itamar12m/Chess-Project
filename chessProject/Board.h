@@ -13,7 +13,6 @@
 #define WHITE false
 
 using std::string;
-using std::cout;
 
 class Board
 {
