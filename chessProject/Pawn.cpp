@@ -2,7 +2,7 @@
 
 bool Pawn::checkFirst(string indexes)
 {
-	if (indexes[1] == '7' && _color == BLACK ||(indexes[1] == '1' && _color == WHITE))
+	if (indexes[1] == '7' && _color == BLACK ||(indexes[1] == '2' && _color == WHITE))
 	{
 		return true;
 	}
@@ -12,33 +12,53 @@ bool Pawn::checkFirst(string indexes)
 bool Pawn::isCapture(string indexes)
 {
 	if (_board->getPiece(indexes[2], indexes[3]) != nullptr &&
+		abs((int)(indexes[0] - indexes[2])) == 1 &&
+		abs((int)(indexes[1] - indexes[3])) == 1
+		/*
 		((indexes[1] + 1 == indexes[3] && indexes[0] -1 == indexes[2]) ||
-		(indexes[1] -1 == indexes[3] && indexes[0] +1 == indexes[2])))
+		(indexes[1] + 1 == indexes[3] && indexes[0] - 1 == indexes[2]) ||
+		(indexes[1] -1 == indexes[3] && indexes[0] +1 == indexes[2]))*/)
 	{
 		return true;
 	}
 	return false;
 }
 
+int Pawn::checkWayForPawn(string indexes)
+{
+	if (_board->getPiece(indexes[2], indexes[3]) != nullptr ||
+		(_color == BLACK && _board->getPiece(indexes[2], indexes[3] + 1) != nullptr && indexes[3] + 1 != indexes[1] ||
+		(_color == WHITE && _board->getPiece(indexes[2], indexes[3] - 1) != nullptr && indexes[3] - 1 != indexes[1])))
+	{
+		return false;
+	}
+	return true;
+}
+
+Pawn::Pawn(bool color, Board* board) : Piece(color, board)
+{
+}
+
 int Pawn::move(string indexes)
 {
 	if (checkFirst(indexes))
 	{
-		if (_color == BLACK && (indexes[2] + 2 == indexes[0] || indexes[2] + 1 == indexes[0])) {
+		if (_color == BLACK && (indexes[3] + 2 == indexes[1] || indexes[3] + 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes)) {
 			return VALID_MOVE;
 		}
-		if (_color == WHITE && (indexes[2] - 2 == indexes[0] || indexes[2] - 1 == indexes[0]))
+		if (_color == WHITE && (indexes[3] - 2 == indexes[1] || indexes[3] - 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes))
 		{
 			return VALID_MOVE;
 		}
 	}
-	else if (isCapture(indexes))
+	if (isCapture(indexes))
 	{
 		return VALID_MOVE;
 	}
-	else if (!((_color == BLACK && indexes[3] + 1 == indexes[1]) ||(_color == WHITE && indexes[3] -1 == indexes[1])))
+	else if (((_color == BLACK && indexes[3] + 1 == indexes[1] && indexes[0] == indexes[2]) ||
+		(_color == WHITE && indexes[3] -1 == indexes[1] && indexes[0] == indexes[2])) && checkWayForPawn(indexes))
 	{
-		return INVALID_PIECE_MOVE;
+		return VALID_MOVE;
 	}
-	return VALID_MOVE;
+	return INVALID_PIECE_MOVE;
 }

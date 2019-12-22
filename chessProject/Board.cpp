@@ -83,13 +83,12 @@ void Board::init(string boardStr)
 			case 'Q':
 				this->_board[i][j] = new Queen(WHITE, this);
 				break;
-			/*
 			case 'p':
 				this->_board[i][j] = new Pawn(BLACK, this);
 				break;
 			case 'P':
 				this->_board[i][j] = new Pawn(WHITE, this);
-				break;*/
+				break;
 			case '#':
 				this->_board[i][j] = nullptr;
 				break;
@@ -136,7 +135,7 @@ void Board::changeTurn()
 
 bool Board::isCheck(bool color)
 {
-	Board copy(*this);
+	/*Board copy(*this);
 	for (char i = 'a'; i <= 'h'; i++)
 	{
 		for (char j = '1'; j <= '8'; j++)
@@ -148,7 +147,7 @@ bool Board::isCheck(bool color)
 				return true;
 			}
 		}
-	}
+	}*/
 	return false;
 }
 
