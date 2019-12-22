@@ -107,8 +107,11 @@ int Board::move(string indexes)
 		return INVALID_SAME_DST_SRC;
 	}
 	int code = this->getPiece(indexes[0], indexes[1])->move(indexes);
-	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
-	this->getPiece(indexes[0], indexes[1]) = nullptr;
+	if (code == VALID_CHECK_MOVE || code == VALID_MOVE)
+	{
+		this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
+		this->getPiece(indexes[0], indexes[1]) = nullptr;
+	}
 	return code;
 }
 
