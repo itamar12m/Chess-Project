@@ -22,10 +22,10 @@ private:
 	bool _turn;
 	Pipe p;
 public:
-	string getMessageFromGraphics();
-	void sendMessageToGraphics(string msg);
 	Board();
 	Board(string boardStr);
+	string getMessageFromGraphics();
+	void sendMessageToGraphics(string msg);
 	void init(string boardStr);
 	int move(string indexes);
 	Piece*& getPiece(char letter, char num);
