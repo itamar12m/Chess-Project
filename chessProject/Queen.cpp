@@ -13,10 +13,10 @@ int Queen::move(string indexes)
 	}
 	if (isBishopMove)
 	{
-		return this->checkWayForBishop(indexes, this->_board);
+		return this->checkWayForBishop(indexes);
 	}
 	else // rook move
 	{
-		return this->checkWayForRook(indexes, this->_board);
+		return this->checkWayForRook(indexes);
 	}
 }

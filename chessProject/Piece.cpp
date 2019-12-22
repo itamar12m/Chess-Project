@@ -10,7 +10,7 @@ bool Piece::getColor()
 	return this->_color;
 }
 
-int Piece::checkWayForRook(string indexes, Board* board)
+int Piece::checkWayForRook(string indexes)
 {
 	int difference;
 	if (indexes[0] != indexes[2]) // horizontal
@@ -18,7 +18,7 @@ int Piece::checkWayForRook(string indexes, Board* board)
 		difference = abs((int)(indexes[2] - indexes[0]));
 		for (int i = 1; i < difference; i++)
 		{
-			if (board->getPiece(indexes[0] + i, indexes[1]) != nullptr)
+			if (this->_board->getPiece(indexes[0] + (indexes[0] > indexes[2] ? -i : i), indexes[1]) != nullptr)
 			{
 				return INVALID_PIECE_MOVE;
 			}
@@ -29,7 +29,7 @@ int Piece::checkWayForRook(string indexes, Board* board)
 		difference = abs((int)(indexes[3] - indexes[1]));
 		for (int i = 1; i < difference; i++)
 		{
-			if (board->getPiece(indexes[0], indexes[1] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
+			if (this->_board->getPiece(indexes[0], indexes[1] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
 			{
 				/*
 				the shorted if:
@@ -43,11 +43,11 @@ int Piece::checkWayForRook(string indexes, Board* board)
 	return VALID_MOVE;
 }
 
-int Piece::checkWayForBishop(string indexes, Board* board)
+int Piece::checkWayForBishop(string indexes)
 {
 	for (int i = 1; i < abs(indexes[0] - indexes[2]); i++)
 	{
-		if (board->getPiece(indexes[2] + (indexes[0] > indexes[2] ? -i : i), indexes[3] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
+		if (this->_board->getPiece(indexes[2] + (indexes[0] > indexes[2] ? -i : i), indexes[3] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
 		{
 			return INVALID_PIECE_MOVE;
 		}

@@ -10,5 +10,5 @@ int Rook::move(string indexes)
 	{
 		return INVALID_PIECE_MOVE;
 	}
-	return this->checkWayForRook(indexes, this->_board); // I did a static function because of the queen
+	return this->checkWayForRook(indexes); // I did a function because of the queen
 }

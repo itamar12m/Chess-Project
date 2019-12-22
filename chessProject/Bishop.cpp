@@ -10,5 +10,5 @@ int Bishop::move(string indexes)
 	{
 		return INVALID_PIECE_MOVE;
 	}
-	return this->checkWayForBishop(indexes, this->_board); // I did a static function because of the queen
+	return this->checkWayForBishop(indexes); // I did a function because of the queen
 }
