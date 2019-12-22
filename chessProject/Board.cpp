@@ -71,13 +71,12 @@ void Board::init(string boardStr)
 			case 'Q':
 				this->_board[i][j] = new Queen(WHITE, this);
 				break;
-			/*
 			case 'p':
 				this->_board[i][j] = new Pawn(BLACK, this);
 				break;
 			case 'P':
 				this->_board[i][j] = new Pawn(WHITE, this);
-				break;*/
+				break;
 			case '#':
 				this->_board[i][j] = nullptr;
 				break;
