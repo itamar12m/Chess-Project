@@ -59,14 +59,14 @@ void Board::init(string boardStr)
 			case 'B':
 				this->_board[i][j] = new Bishop(WHITE, this);
 				break;
-				/*
+				
 			case 'k':
 				this->_board[i][j] = new King(BLACK, this);
 				break;
 			case 'K':
 				this->_board[i][j] = new King(WHITE, this);
 				break;
-			*/
+			
 			case 'q':
 				this->_board[i][j] = new Queen(BLACK, this);
 				break;
