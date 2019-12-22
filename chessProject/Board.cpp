@@ -12,8 +12,8 @@ void Board::sendMessageToGraphics(string msg)
 
 Board::Board()
 {
-	string boardStr = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
 	this->_turn = WHITE;
+	string boardStr = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
 	this->init(boardStr);
 	if (!p.connect())
 	{
@@ -59,14 +59,12 @@ void Board::init(string boardStr)
 			case 'B':
 				this->_board[i][j] = new Bishop(WHITE, this);
 				break;
-				
 			case 'k':
 				this->_board[i][j] = new King(BLACK, this);
 				break;
 			case 'K':
 				this->_board[i][j] = new King(WHITE, this);
 				break;
-			
 			case 'q':
 				this->_board[i][j] = new Queen(BLACK, this);
 				break;
@@ -85,6 +83,7 @@ void Board::init(string boardStr)
 				break;
 			default:
 				// error
+				this->_board[i][j] = nullptr;
 				break;
 			}
 		}
@@ -101,10 +100,6 @@ int Board::move(string indexes)
 	if (this->getPiece(indexes[2], indexes[3]) != nullptr && this->getPiece(indexes[2], indexes[3])->getColor() == this->_turn)
 	{
 		return INVALID_PIECE_IN_DST;
-	}
-	if (indexes[0] == indexes[2] && indexes[1] == indexes[3])
-	{
-		return INVALID_SAME_DST_SRC;
 	}
 	int code = this->getPiece(indexes[0], indexes[1])->move(indexes);
 	if (code == VALID_CHECK_MOVE || code == VALID_MOVE)
@@ -129,14 +124,6 @@ void Board::changeTurn()
 
 bool Board::isCheck()
 {
-	Board test(*this); // creating another board to check on it if this is check..
-	for (size_t i = 0; i < 8; i++)
-	{
-		for (size_t j = 0; j < 8; j++)
-		{
-			// ...
-		}
-	}
 	return false;
 }
 
