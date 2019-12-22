@@ -10,6 +10,18 @@ void Board::sendMessageToGraphics(string msg)
 	p.sendMessageToGraphics(msg.c_str());
 }
 
+void Board::setKingPosition(string pos, bool color)
+{
+	if (color == WHITE)
+	{
+		this->whiteKing = pos;
+	}
+	else
+	{
+		this->blackKing = pos;
+	}
+}
+
 Board::Board()
 {
 	this->_turn = WHITE;
@@ -46,13 +58,13 @@ void Board::init(string boardStr)
 				break;
 			case 'R':
 				this->_board[i][j] = new Rook(WHITE, this);
-				break;/*
+				break;
 			case 'n':
 				this->_board[i][j] = new Knight(BLACK, this);
 				break;
 			case 'N':
 				this->_board[i][j] = new Knight(WHITE, this);
-				break;*/
+				break;
 			case 'b':
 				this->_board[i][j] = new Bishop(BLACK, this);
 				break;
@@ -122,8 +134,21 @@ void Board::changeTurn()
 	this->_turn = this->_turn == WHITE ? this->_turn = BLACK : this->_turn = WHITE;
 }
 
-bool Board::isCheck()
+bool Board::isCheck(bool color)
 {
+	Board copy(*this);
+	for (char i = 'a'; i <= 'h'; i++)
+	{
+		for (char j = '1'; j <= '8'; j++)
+		{
+			if (copy.getPiece(i, j) != nullptr &&
+				(copy.getPiece(i, j)->move(string(1, i) + string(1, j) +
+				(color == WHITE ? whiteKing : blackKing)) == VALID_MOVE))
+			{
+				return true;
+			}
+		}
+	}
 	return false;
 }
 

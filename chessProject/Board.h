@@ -20,15 +20,18 @@ private:
 	Piece* _board[8][8];
 	bool _turn;
 	Pipe p;
+	string whiteKing;
+	string blackKing;
 public:
 	Board();
 	Board(string boardStr);
 	string getMessageFromGraphics();
 	void sendMessageToGraphics(string msg);
+	void setKingPosition(string pos, bool color);
 	void init(string boardStr);
 	int move(string indexes);
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
-	bool isCheck();
+	bool isCheck(bool color);
 	~Board();
 };

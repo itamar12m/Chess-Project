@@ -9,12 +9,16 @@ int main()
 	system("Start chessGraphics.exe");
 	Sleep(1000);
 
-	Board b("###k####q###########B##########Q######b###########r######R##K###0");
+	Board b("rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0");
 	string messageFromGraphics, messageToGraphics;
 	while ((messageFromGraphics = b.getMessageFromGraphics()) != "quit")
 	{
 		messageToGraphics = std::to_string(b.move(messageFromGraphics));
 		b.sendMessageToGraphics(messageToGraphics);
+		if (b.isCheck(WHITE))
+		{
+			cout << "check!\n";
+		}
 		if (messageToGraphics == std::to_string(VALID_CHECK_MOVE) ||
 			messageToGraphics == std::to_string(VALID_MOVE)) // if it's mate so the game is over..
 		{
