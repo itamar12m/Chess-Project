@@ -45,6 +45,11 @@ Board::Board(string boardStr)
 	this->p.sendMessageToGraphics(boardStr.c_str());
 }
 
+bool Board::getTurn()
+{
+	return this->_turn;
+}
+
 void Board::init(string boardStr)
 {
 	for (size_t i = 0; i < 8; i++)

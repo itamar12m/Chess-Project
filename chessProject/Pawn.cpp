@@ -13,11 +13,9 @@ bool Pawn::isCapture(string indexes)
 {
 	if (_board->getPiece(indexes[2], indexes[3]) != nullptr &&
 		abs((int)(indexes[0] - indexes[2])) == 1 &&
-		abs((int)(indexes[1] - indexes[3])) == 1
-		/*
-		((indexes[1] + 1 == indexes[3] && indexes[0] -1 == indexes[2]) ||
-		(indexes[1] + 1 == indexes[3] && indexes[0] - 1 == indexes[2]) ||
-		(indexes[1] -1 == indexes[3] && indexes[0] +1 == indexes[2]))*/)
+		abs((int)(indexes[1] - indexes[3])) == 1 &&
+		(_board->getPiece(indexes[0], indexes[1])->getColor() == WHITE && indexes[3]-indexes[1] == 1 ||
+			_board->getPiece(indexes[0], indexes[1])->getColor() == BLACK && indexes[3] - indexes[1] == -1))
 	{
 		return true;
 	}
