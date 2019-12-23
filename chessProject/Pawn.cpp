@@ -37,7 +37,7 @@ Pawn::Pawn(bool color, Board* board) : Piece(color, board)
 {
 }
 
-int Pawn::move(string indexes)
+int Pawn::checkValid(string indexes)
 {
 	if (checkFirst(indexes))
 	{

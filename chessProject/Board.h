@@ -25,7 +25,8 @@ private:
 public:
 	Board();
 	Board(string boardStr);
-	bool getTurn();
+	int checkValid(string indexes);
+	bool getTurn() const;
 	string getMessageFromGraphics();
 	void sendMessageToGraphics(string msg);
 	void setKingPosition(string pos, bool color);

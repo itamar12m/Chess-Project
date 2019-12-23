@@ -47,7 +47,7 @@ int Piece::checkWayForBishop(string indexes)
 {
 	for (int i = 1; i < abs(indexes[0] - indexes[2]); i++)
 	{
-		if (this->_board->getPiece(indexes[2] + (indexes[0] > indexes[2] ? -i : i), indexes[3] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
+		if (this->_board->getPiece(indexes[0] + (indexes[0] > indexes[2] ? -i : i), indexes[1] + (indexes[1] > indexes[3] ? -i : i)) != nullptr)
 		{
 			return INVALID_PIECE_MOVE;
 		}

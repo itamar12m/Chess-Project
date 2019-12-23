@@ -4,7 +4,7 @@ Queen::Queen(bool color, Board* board) : Piece(color, board)
 {
 }
 
-int Queen::move(string indexes)
+int Queen::checkValid(string indexes)
 {
 	bool isBishopMove = indexes[0] != indexes[2] && indexes[1] != indexes[3]; // or it's an error
 	if (abs((int)(indexes[0] - indexes[2])) != abs((int)(indexes[1] - indexes[3])) && isBishopMove)
