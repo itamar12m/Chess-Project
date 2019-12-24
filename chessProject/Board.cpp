@@ -115,6 +115,14 @@ bool Board::getTurn() const
 
 int Board::move(string indexes)
 {
+	for (size_t i = 0; i < 8; i++) // for the debugging
+	{
+		for (size_t j = 0; j < 8; j++)
+		{
+			cout << this->_board[i][j] << ' ';
+		}
+		cout << endl;
+	}
 	int code = this->checkValid(indexes);
 	Piece* copy = nullptr;
 	if (code == VALID_MOVE)
