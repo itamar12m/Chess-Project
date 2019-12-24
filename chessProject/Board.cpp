@@ -25,7 +25,7 @@ void Board::setKingPosition(string pos, bool color)
 Board::Board()
 {
 	this->_turn = WHITE;
-	string boardStr = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	string boardStr = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
 	this->init(boardStr);
 	if (!_p.connect())
 	{
@@ -58,6 +58,15 @@ int Board::checkValid(string indexes)
 	if (this->getPiece(indexes[2], indexes[3]) != nullptr && this->getPiece(indexes[2], indexes[3])->getColor() == this->_turn)
 	{
 		return INVALID_PIECE_IN_DST;
+	}
+	if (this->isCheck(_turn))
+	{
+		this->moveBack(indexes);
+		return INVALID_SELF_CHECK_MOVE;
+	}
+	if (this->isCheck(!_turn))
+	{
+		return VALID_CHECK_MOVE;
 	}
 	if (indexes[0] == indexes[2] && indexes[1] == indexes[3]) // it's needed because of the function
 		// of isCheck - it checks also the king itself
@@ -125,24 +134,13 @@ void Board::init(string boardStr)
 				break;
 			}
 		}
-		
 	}
 }
 
 int Board::move(string indexes)
 {
 	int code = this->checkValid(indexes);
-	//Board copy(*this);
-	
-	if (this->isCheck(_turn))
-	{
-		this->moveBack(indexes);
-		code = INVALID_SELF_CHECK_MOVE;
-	}
-	else if (this->isCheck(!_turn))
-	{
-		code = VALID_CHECK_MOVE;
-	}
+
 	if (code == VALID_CHECK_MOVE || code == VALID_MOVE)
 	{
 		this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
