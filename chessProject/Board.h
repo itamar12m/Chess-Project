@@ -24,7 +24,6 @@ private:
 	string _blackKing;
 public:
 	Board();
-	void moveBack(string indexes);
 	int checkValid(string indexes);
 	bool getTurn() const;
 	string getMessageFromGraphics();
