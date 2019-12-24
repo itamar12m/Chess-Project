@@ -19,12 +19,12 @@ class Board
 private:
 	Piece* _board[8][8];
 	bool _turn;
-	Pipe p;
-	string whiteKing;
-	string blackKing;
+	Pipe _p;
+	string _whiteKing;
+	string _blackKing;
 public:
 	Board();
-	Board(string boardStr);
+	void moveBack(string indexes);
 	int checkValid(string indexes);
 	bool getTurn() const;
 	string getMessageFromGraphics();

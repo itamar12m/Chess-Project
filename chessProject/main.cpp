@@ -9,7 +9,7 @@ int main()
 	system("Start chessGraphics.exe");
 	Sleep(1000);
 
-	Board b("rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0");
+	Board b;
 	string messageFromGraphics, messageToGraphics;
 	while ((messageFromGraphics = b.getMessageFromGraphics()) != "quit")
 	{
