@@ -123,6 +123,7 @@ int Board::move(string indexes)
 		}
 		cout << endl;
 	}
+	string tmpPlaceKing = (_turn == WHITE ? _whiteKing : _blackKing);
 	int code = this->checkValid(indexes);
 	Piece* copy = nullptr;
 	if (code == VALID_MOVE)
@@ -133,6 +134,7 @@ int Board::move(string indexes)
 	}
 	if (this->isCheck(this->_turn)) // check on the current player
 	{
+		setKingPosition(tmpPlaceKing, _turn);
 		this->getPiece(indexes[0], indexes[1]) = this->getPiece(indexes[2], indexes[3]);
 		this->getPiece(indexes[2], indexes[3]) = copy;
 		code = INVALID_SELF_CHECK_MOVE;
