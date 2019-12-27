@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "Pipe.h"
 #include "Bishop.h"
 #include "King.h"
@@ -22,11 +23,13 @@ private:
 	Pipe _p;
 	string _whiteKing;
 	string _blackKing;
+	vector<string> findWay(string indexes);
 public:
 	Board();
 	int checkValid(string indexes);
 	bool getTurn() const;
 	string getMessageFromGraphics();
+	void printBoard();
 	void sendMessageToGraphics(string msg);
 	void setKingPosition(string pos, bool color);
 	void init(string boardStr);
@@ -34,5 +37,6 @@ public:
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
 	bool isCheck(bool color);
+	bool isCheckMate(bool color);
 	~Board();
 };

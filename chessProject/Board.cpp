@@ -73,6 +73,25 @@ string Board::getMessageFromGraphics()
 	return this->_p.getMessageFromGraphics();
 }
 
+void Board::printBoard()
+{
+	for (size_t i = 0; i < 8; i++) // for the debugging
+	{
+		for (size_t j = 0; j < 8; j++)
+		{
+			if (this->_board[i][j] == nullptr)
+			{
+				cout << "- ";
+			}
+			else
+			{
+				cout << "o ";
+			}
+		}
+		cout << endl;
+	}
+}
+
 void Board::sendMessageToGraphics(string msg)
 {
 	this->_p.sendMessageToGraphics(msg.c_str());
@@ -115,14 +134,6 @@ bool Board::getTurn() const
 
 int Board::move(string indexes)
 {
-	for (size_t i = 0; i < 8; i++) // for the debugging
-	{
-		for (size_t j = 0; j < 8; j++)
-		{
-			cout << this->_board[i][j] << ' ';
-		}
-		cout << endl;
-	}
 	string tmpPlaceKing = (_turn == WHITE ? _whiteKing : _blackKing);
 	int code = this->checkValid(indexes);
 	Piece* copy = nullptr;
@@ -131,6 +142,10 @@ int Board::move(string indexes)
 		copy = this->getPiece(indexes[2], indexes[3]);
 		this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
 		this->getPiece(indexes[0], indexes[1]) = nullptr;
+	}
+	else
+	{
+		return code;
 	}
 	if (this->isCheck(this->_turn)) // check on the current player
 	{
@@ -141,13 +156,17 @@ int Board::move(string indexes)
 	}
 	else if (this->isCheck(!this->_turn)) // check on the other player
 	{
+		if (this->isCheckMate(!this->_turn))
+		{
+			cout << "The winner is " << (this->_turn == WHITE ? "white!" : "black!");
+			return VALID_MATE;
+		}
 		code = VALID_CHECK_MOVE;
 	}
 	if (code == VALID_CHECK_MOVE || code == VALID_MOVE)
 	{
 		this->changeTurn();
 	}
-	
 	return code;
 }
 
@@ -181,6 +200,58 @@ bool Board::isCheck(bool color)
 	}
 	this->_turn = tmpTurn;
 	return false;
+}
+
+vector<string> Board::findWay(string indexes)
+{
+	vector<string> way;
+	bool bishopMove = abs((int)(indexes[0] - indexes[2])) == abs((int)(indexes[1] - indexes[3]));
+	bool rookMove = !abs((int)(indexes[0] - indexes[2])) && abs((int)(indexes[1] - indexes[3])) ||
+		abs((int)(indexes[0] - indexes[2])) && !abs((int)(indexes[1] - indexes[3]));
+	bool pawnMove = abs((int)(indexes[0] - indexes[2])) == 1 && abs((int)(indexes[1] - indexes[2])) == 1;
+	if (pawnMove)
+	{
+		way.push_back(indexes.substr(0, 2));
+	}
+	else if (bishopMove)
+	{
+		for (int i = 0; i < abs((int)(indexes[0] - indexes[2])); i++)
+		{
+			way.push_back(string(1, (indexes[0] + (indexes[0] > indexes[2] ? -i : i))) +
+				string(1, (indexes[1] + (indexes[1] > indexes[3] ? -i : i))));
+		}
+	}
+	else if (rookMove)
+	{
+		int difference = abs((int)(indexes[0] - indexes[2])) ?
+			abs((int)(indexes[0] - indexes[2])) : abs((int)(indexes[1] - indexes[3]));
+		for (int i = 0; i < difference; i++)
+		{
+			char step = abs((int)(indexes[0] - indexes[2])) ? // horizontal
+				(indexes[0] + (indexes[0] > indexes[2] ? -i : i)) :
+				(indexes[1] + (indexes[1] > indexes[3] ? -i : i));
+			abs((int)(indexes[0] - indexes[2])) ?
+				way.push_back(string(1, step) + string(1, indexes[1])) :
+				way.push_back(string(1, indexes[0]) + string(1, step));
+		}
+	}
+	return way;
+}
+
+bool Board::isCheckMate(bool color)
+{
+	string kingPos = (color == WHITE ? this->_whiteKing : this->_blackKing);
+	for (char i = 0; i < 2; i++)
+	{
+		for (char j = 0; j < 2; j++)
+		{
+			if (this->move(kingPos + string(1, (kingPos[0] + i)) + string(1, (kingPos[1] + j))) == VALID_MOVE)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 Board::~Board()
