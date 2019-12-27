@@ -10,6 +10,13 @@
 #include "Knight.h"
 #include "Piece.h"
 
+enum checkMate
+{
+	NOTHING = -1,
+	CHECK,
+	MATE
+};
+
 #define BLACK true
 #define WHITE false
 
@@ -36,7 +43,7 @@ public:
 	int move(string indexes);
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
-	bool isCheck(bool color);
-	bool isCheckMate(bool color);
+	checkMate isCheckMate(bool color);
+	bool isMate(vector<string> way, bool turn);
 	~Board();
 };
