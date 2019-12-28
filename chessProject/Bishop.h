@@ -6,5 +6,5 @@ class Bishop : public Piece
 {
 public:
 	Bishop(bool color, Board* board);
-	virtual int checkValid(string indexes);
+	virtual codes checkValid(string indexes);
 };

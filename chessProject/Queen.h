@@ -6,5 +6,5 @@ class Queen : public Piece
 {
 public:
 	Queen(bool color, Board* board);
-	virtual int checkValid(string indexes);
+	virtual codes checkValid(string indexes);
 };

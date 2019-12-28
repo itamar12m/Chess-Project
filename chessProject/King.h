@@ -6,5 +6,5 @@ class King : public Piece
 {
 public:
 	King(bool color, Board* board);
-	virtual int checkValid(string indexes);
+	virtual codes checkValid(string indexes);
 };

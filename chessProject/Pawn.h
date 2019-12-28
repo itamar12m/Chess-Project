@@ -10,5 +10,5 @@ private:
 	int checkWayForPawn(string indexes);
 public:
 	Pawn(bool color, Board* board);
-	virtual int checkValid(string indexes);
+	virtual codes checkValid(string indexes);
 };

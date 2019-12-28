@@ -10,7 +10,7 @@ bool Piece::getColor()
 	return this->_color;
 }
 
-int Piece::checkWayForRook(string indexes)
+codes Piece::checkWayForRook(string indexes)
 {
 	int difference;
 	if (indexes[0] != indexes[2]) // horizontal
@@ -43,7 +43,7 @@ int Piece::checkWayForRook(string indexes)
 	return VALID_MOVE;
 }
 
-int Piece::checkWayForBishop(string indexes)
+codes Piece::checkWayForBishop(string indexes)
 {
 	for (int i = 1; i < abs(indexes[0] - indexes[2]); i++)
 	{

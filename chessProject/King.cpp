@@ -6,7 +6,7 @@ King::King(bool color, Board* board) : Piece(color, board)
 	this->_board->setKingPosition("e1", WHITE);
 }
 
-int King::checkValid(string indexes)
+codes King::checkValid(string indexes)
 {
 	if (abs((int)(indexes[0] - indexes[2])) == 1 && abs((int)(indexes[1] - indexes[3])) == 1 ||
 		abs((int)(indexes[0] - indexes[2])) == 1 && abs((int)(indexes[1] - indexes[3])) == 0 ||

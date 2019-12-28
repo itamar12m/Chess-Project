@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Pipe.h"
 #include "Board.h"
 
 using std::string;

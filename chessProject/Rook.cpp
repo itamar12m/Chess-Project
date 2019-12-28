@@ -4,7 +4,7 @@ Rook::Rook(bool color, Board* board) : Piece(color, board)
 {
 }
 
-int Rook::checkValid(string indexes)
+codes Rook::checkValid(string indexes)
 {
 	if (indexes[0] != indexes[2] && indexes[1] != indexes[3])
 	{

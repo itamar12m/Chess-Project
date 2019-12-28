@@ -64,12 +64,12 @@ public:
 	bool connect()
 	{
 		hPipe = CreateFile(
-			strPipeName,			// Pipe name 
-			GENERIC_READ |			// Read and write access 
+			strPipeName,			// Pipe name
+			GENERIC_READ |			// Read and write access
 			GENERIC_WRITE,
-			0,						// No sharing 
+			0,						// No sharing
 			NULL,					// Default security attributes
-			OPEN_EXISTING,			// Opens existing pipe 
+			OPEN_EXISTING,			// Opens existing pipe
 			0,						// Default attributes 
 			NULL);					// No template file 
 

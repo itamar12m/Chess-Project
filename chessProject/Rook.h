@@ -6,5 +6,5 @@ class Rook : public Piece
 {
 public:
 	Rook(bool color, Board* board);
-	virtual int checkValid(string indexes);
+	virtual codes checkValid(string indexes);
 };

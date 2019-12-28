@@ -33,14 +33,14 @@ private:
 	vector<string> findWay(string indexes);
 public:
 	Board();
-	int checkValid(string indexes);
+	codes checkValid(string indexes);
 	bool getTurn() const;
 	string getMessageFromGraphics();
 	void printBoard();
 	void sendMessageToGraphics(string msg);
 	void setKingPosition(string pos, bool color);
 	void init(string boardStr);
-	int move(string indexes);
+	codes move(string indexes);
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
 	checkMate isCheckMate(bool color);

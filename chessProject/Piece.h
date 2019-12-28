@@ -2,14 +2,18 @@
 #include <iostream>
 #include "stdafx.h"
 
-#define VALID_MOVE 0
-#define VALID_CHECK_MOVE 1
-#define INVALID_NOT_PLAYER_PIECE_SRC 2
-#define INVALID_PIECE_IN_DST 3
-#define INVALID_SELF_CHECK_MOVE 4
-#define INVALID_PIECE_MOVE 6
-#define INVALID_SAME_DST_SRC 7
-#define VALID_MATE 8
+enum codes
+{
+VALID_MOVE,
+VALID_CHECK_MOVE,
+INVALID_NOT_PLAYER_PIECE_SRC,
+INVALID_PIECE_IN_DST,
+INVALID_SELF_CHECK_MOVE,
+INVALID_WRONG_INDEX,
+INVALID_PIECE_MOVE,
+INVALID_SAME_DST_SRC,
+VALID_MATE
+};
 
 using std::string;
 
@@ -19,13 +23,13 @@ class Piece
 {
 public:
 	Piece(bool color, Board* board);
-	virtual int checkValid(string indexes) = 0;
+	virtual codes checkValid(string indexes) = 0;
 	bool getColor();
 	virtual ~Piece();
 
 protected:
-	int checkWayForRook(string indexes);
-	int checkWayForBishop(string indexes);
+	codes checkWayForRook(string indexes);
+	codes checkWayForBishop(string indexes);
 	bool _color;
 	Board* _board;
 };
