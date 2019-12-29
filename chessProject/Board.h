@@ -33,17 +33,17 @@ private:
 	vector<string> findWay(string indexes);
 public:
 	Board();
+	void printBoard();
 	codes checkValid(string indexes);
 	bool getTurn() const;
 	string getMessageFromGraphics();
-	void printBoard();
 	void sendMessageToGraphics(string msg);
 	void setKingPosition(string pos, bool color);
 	void init(string boardStr);
 	codes move(string indexes);
 	Piece*& getPiece(char letter, char num);
 	void changeTurn();
-	checkMate isCheckMate(bool color);
+	checkMate isCheck(bool color);
 	bool isMate(vector<string> way, bool turn);
 	~Board();
 };
