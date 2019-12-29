@@ -33,8 +33,31 @@ int Pawn::checkWayForPawn(string indexes)
 	return true;
 }
 
-void Pawn::promotion()
+void Pawn::promotion(string indexes)
 {
+	char choose;
+	delete _board->getPiece(indexes[2], indexes[3]);
+	cout << "What do you want to replace the pawn with?" << endl <<
+		"(q - queen, r - rook, b - bishop, n - knight)" << endl;
+	cin >> choose;
+	switch (choose)
+	{
+	case 'r':
+		_board->getPiece(indexes[2], indexes[3]) = new Rook(_color, _board);
+		break;
+	case 'n':
+		_board->getPiece(indexes[2], indexes[3]) = new Knight(_color, _board);
+		break;
+	case 'b':
+		_board->getPiece(indexes[2], indexes[3]) = new Bishop(_color, _board);
+		break;
+	case 'q':
+		_board->getPiece(indexes[2], indexes[3]) = new Queen(_color, _board);
+		break;
+	default:
+		break;
+	}
+	
 }
 
 Pawn::Pawn(bool color, Board* board) : Piece(color, board)
@@ -43,15 +66,15 @@ Pawn::Pawn(bool color, Board* board) : Piece(color, board)
 
 codes Pawn::checkValid(string indexes)
 {
-	int flag = 0;
+	codes flag = INVALID_PIECE_MOVE;
 	if (checkFirst(indexes))
 	{
 		if (_color == BLACK && (indexes[3] + 2 == indexes[1] || indexes[3] + 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes)) {
-			flag = VALID_MOVE;
+			return VALID_MOVE;
 		}
-		if (_color == WHITE && (indexes[3] - 2 == indexes[1] || indexes[3] - 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes))
+		else if (_color == WHITE && (indexes[3] - 2 == indexes[1] || indexes[3] - 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes))
 		{
-			flag = VALID_MOVE;
+			return VALID_MOVE;
 		}
 	}
 	else if (isCapture(indexes))
@@ -65,11 +88,11 @@ codes Pawn::checkValid(string indexes)
 	}
 	else
 	{
-		flag = INVALID_PIECE_MOVE;
+		return INVALID_PIECE_MOVE;
 	}
-	if ((flag == VALID_MOVE || flag == VALID_CHECK_MOVE) &&
-		((_color == WHITE && indexes[3] == '8') || (_color == BLACK && indexes[3] == '1')))
+	if ((flag == VALID_MOVE || flag == VALID_CHECK_MOVE) &&((_color == WHITE && indexes[3] == '8') || (_color == BLACK && indexes[3] == '1')))
 	{
-		promotion();
+		promotion(indexes);
 	}
+	return flag;
 }
