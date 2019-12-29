@@ -8,6 +8,7 @@ private:
 	bool checkFirst(string indexes);
 	bool isCapture(string indexes);
 	int checkWayForPawn(string indexes);
+	void promotion();
 public:
 	Pawn(bool color, Board* board);
 	virtual codes checkValid(string indexes);
