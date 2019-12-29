@@ -80,10 +80,8 @@ void Board::init(string boardStr)
 			case '#':
 				this->_board[i][j] = nullptr;
 				break;
-			default:
-				// error
-				this->_board[i][j] = nullptr;
-				break;
+			// it can't be something else because the constructor gives the string
+			// not the user
 			}
 		}
 	}
@@ -164,6 +162,10 @@ vector<string> Board::findWay(string indexes)
 		abs((int)(indexes[0] - indexes[2])) == 1 && abs((int)(indexes[1] - indexes[3])) == 2) // knight
 	{
 		way.push_back(indexes.substr(0, 2));
+	}
+	else
+	{
+		cout << "not good!";
 	}
 	return way;
 }
@@ -251,11 +253,11 @@ checkMate Board::isCheck(bool turn)
 				(turn == WHITE ? _whiteKing : _blackKing)) == VALID_MOVE)
 			{
 				vector<string> way = this->findWay(string(1, i) + string(1, j) +
-					(turn == WHITE ? _whiteKing : _blackKing));/*
+					(turn == WHITE ? _whiteKing : _blackKing));
 				if (isMate(way, turn))
 				{
 					return MATE;
-				}*/
+				}
 				this->_turn = tmpTurn;
 				return CHECK;
 			}
