@@ -180,6 +180,7 @@ codes Board::move(string indexes)
 			this->changeTurn();
 			return VALID_CHECK_MOVE;
 		}
+	
 		else if (this->isCheck(!this->_turn) == MATE)
 		{
 			return VALID_MATE;
@@ -250,11 +251,11 @@ checkMate Board::isCheck(bool turn)
 				(turn == WHITE ? _whiteKing : _blackKing)) == VALID_MOVE)
 			{
 				vector<string> way = this->findWay(string(1, i) + string(1, j) +
-					(turn == WHITE ? _whiteKing : _blackKing));
+					(turn == WHITE ? _whiteKing : _blackKing));/*
 				if (isMate(way, turn))
 				{
 					return MATE;
-				}
+				}*/
 				this->_turn = tmpTurn;
 				return CHECK;
 			}
