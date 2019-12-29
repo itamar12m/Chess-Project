@@ -57,7 +57,7 @@ void Pawn::promotion(string indexes)
 	default:
 		break;
 	}
-	
+
 }
 
 Pawn::Pawn(bool color, Board* board) : Piece(color, board)
@@ -72,32 +72,28 @@ codes Pawn::checkValid(string indexes)
 		if (_color == BLACK && (indexes[3] + 2 == indexes[1] || indexes[3] + 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes)) {
 			return VALID_MOVE;
 		}
-		else if (_color == WHITE && (indexes[3] - 2 == indexes[1] || indexes[3] - 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes))
+		if (_color == WHITE && (indexes[3] - 2 == indexes[1] || indexes[3] - 1 == indexes[1]) && indexes[0] == indexes[2] && checkWayForPawn(indexes))
 		{
 			return VALID_MOVE;
 		}
 	}
-	if (isCapture(indexes))
+	else if (isCapture(indexes))
 	{
-		return VALID_MOVE;
+		flag = VALID_MOVE;
 	}
 	else if (((_color == BLACK && indexes[3] + 1 == indexes[1] && indexes[0] == indexes[2]) ||
 		(_color == WHITE && indexes[3] - 1 == indexes[1] && indexes[0] == indexes[2])) && checkWayForPawn(indexes))
-	{
-		return VALID_MOVE;
-	}
-	return INVALID_PIECE_MOVE;
-		(_color == WHITE && indexes[3] -1 == indexes[1] && indexes[0] == indexes[2])) && checkWayForPawn(indexes))
 	{
 		flag = VALID_MOVE;
 	}
 	else
 	{
 		return INVALID_PIECE_MOVE;
-	}
-	if ((flag == VALID_MOVE || flag == VALID_CHECK_MOVE) &&((_color == WHITE && indexes[3] == '8') || (_color == BLACK && indexes[3] == '1')))
+	}/*
+	if ((flag == VALID_MOVE || flag == VALID_CHECK_MOVE) &&
+		((_color == WHITE && indexes[3] == '8') || (_color == BLACK && indexes[3] == '1')))
 	{
 		promotion(indexes);
-	}
+	}*/
 	return flag;
 }

@@ -80,8 +80,8 @@ void Board::init(string boardStr)
 			case '#':
 				this->_board[i][j] = nullptr;
 				break;
-			// it can't be something else because the constructor gives the string
-			// not the user
+			default:
+				break;
 			}
 		}
 	}
@@ -130,7 +130,7 @@ vector<string> Board::findWay(string indexes)
 {
 	vector<string> way;
 	if (abs((int)(indexes[0] - indexes[2])) == 1 &&
-		abs((int)(indexes[1] - indexes[3])) == 1) // pawn move
+		abs((int)(indexes[1] - indexes[2])) == 1) // pawn move
 	{
 		way.push_back(indexes.substr(0, 2));
 	}
@@ -163,50 +163,35 @@ vector<string> Board::findWay(string indexes)
 	{
 		way.push_back(indexes.substr(0, 2));
 	}
-	else
-	{
-		cout << "not good!";
-	}
 	return way;
 }
 
 codes Board::move(string indexes)
 {
-	string tmpKingPos = this->getPiece(indexes[0], indexes[1])->getColor() == WHITE ? this->_whiteKing : this->_blackKing;
 	codes code = this->checkValid(indexes);
-	checkMate checkOrMate;
-	if (code != VALID_MOVE)
+	if (code == VALID_MOVE)
 	{
-		return code;
-	}
-	Piece* copy = this->getPiece(indexes[2], indexes[3]);
-	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
-	this->getPiece(indexes[0], indexes[1]) = nullptr;
-	if (this->isCheck(this->_turn) == CHECK) // check on the current player
-	{
-		this->getPiece(indexes[0], indexes[1]) = this->getPiece(indexes[2], indexes[3]);
-		this->getPiece(indexes[2], indexes[3]) = copy;
-		this->setKingPosition(tmpKingPos, this->getPiece(indexes[0], indexes[1])->getColor());
-		return INVALID_SELF_CHECK_MOVE;
-	}
-	checkOrMate = this->isCheck(!this->_turn);
-	if (checkOrMate == CHECK) // check on the other player
-	{
+		this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
+		this->getPiece(indexes[0], indexes[1]) = nullptr;
+		if (this->isCheck(!this->_turn) == CHECK) // check on the other player
+		{
+			this->changeTurn();
+			return VALID_CHECK_MOVE;
+		}
+
+		else if (this->isCheck(!this->_turn) == MATE)
+		{
+			return VALID_MATE;
+		}
 		this->changeTurn();
-		return VALID_CHECK_MOVE;
 	}
-	else if (checkOrMate == MATE)
-	{
-		return VALID_MATE;
-	}
-	this->changeTurn();
+	cout << _blackKing << endl;
 	printBoard();
 	return code;
 }
 
 codes Board::checkValid(string indexes) // checks about move errors and self check
 {
-	cout << this->_whiteKing << ' ' << this->_blackKing << endl;
 	if (indexes[0] > 'h' || indexes[0] < 'a' || indexes[1] > '8' || indexes[1] < '1' ||
 		indexes[2] > 'h' || indexes[2] < 'a' || indexes[3] > '8' || indexes[3] < '1') // we need this for the king move,
 		// we did in the function isMate invalid moves..
@@ -227,7 +212,29 @@ codes Board::checkValid(string indexes) // checks about move errors and self che
 		return INVALID_SAME_DST_SRC;
 	}
 
-	return this->getPiece(indexes[0], indexes[1])->checkValid(indexes);
+	string tmpKingPos = this->getPiece(indexes[0], indexes[1])->getColor() == WHITE ? this->_whiteKing : this->_blackKing;
+	codes code = this->getPiece(indexes[0], indexes[1])->checkValid(indexes);
+	Piece* copy;
+	if (code == VALID_MOVE) // then move the piece
+	{
+		copy = this->getPiece(indexes[2], indexes[3]);
+		this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
+		this->getPiece(indexes[0], indexes[1]) = nullptr;
+	}
+	else
+	{
+		return code;
+	}
+	if (this->isCheck(this->_turn) == CHECK) // check on the current player
+	{
+		this->getPiece(indexes[0], indexes[1]) = this->getPiece(indexes[2], indexes[3]);
+		this->getPiece(indexes[2], indexes[3]) = copy;
+		this->setKingPosition(tmpKingPos, this->getPiece(indexes[0], indexes[1])->getColor());
+		return INVALID_SELF_CHECK_MOVE;
+	}
+	this->getPiece(indexes[0], indexes[1]) = this->getPiece(indexes[2], indexes[3]);
+	this->getPiece(indexes[2], indexes[3]) = copy;
+	return VALID_MOVE;
 }
 
 checkMate Board::isCheck(bool turn)
@@ -242,11 +249,11 @@ checkMate Board::isCheck(bool turn)
 				(turn == WHITE ? _whiteKing : _blackKing)) == VALID_MOVE)
 			{
 				vector<string> way = this->findWay(string(1, i) + string(1, j) +
-					(turn == WHITE ? _whiteKing : _blackKing));
+					(turn == WHITE ? _whiteKing : _blackKing));/*
 				if (isMate(way, turn))
 				{
 					return MATE;
-				}
+				}*/
 				this->_turn = tmpTurn;
 				return CHECK;
 			}
@@ -259,37 +266,16 @@ checkMate Board::isCheck(bool turn)
 bool Board::isMate(vector<string> way, bool turn)
 {
 	bool tmpTurn = this->_turn;
-	bool flag;
 	this->_turn = turn;
 	string kingPos = (turn == WHITE ? this->_whiteKing : this->_blackKing);
 	for (int i = -1; i < 2; i++) // first check -> if the king can move
 	{
 		for (int j = -1; j < 2; j++)
 		{
-			flag = true;
 			if (this->checkValid(kingPos + string(1, (kingPos[0] + i)) + string(1, (kingPos[1] + j))) == VALID_MOVE)
 			{
-				Piece* copy = this->getPiece(kingPos[0] + i, kingPos[1] + j);
-				this->getPiece(kingPos[0] + i, kingPos[1] + j) = this->getPiece(kingPos[0], kingPos[1]);
-				this->getPiece(kingPos[0], kingPos[1]) = nullptr;
-				for (char k = 'a'; k < 'h' && flag; k++)
-				{
-					for (char l = '1'; l < '8' && flag; l++)
-					{
-						if (this->checkValid(string(1, i) + string(1, j) + kingPos) == VALID_MOVE)
-						{
-							this->getPiece(kingPos[0] + i, kingPos[1] + j) = copy;
-							this->getPiece(kingPos[0], kingPos[1]) = this->getPiece(kingPos[0] + i, kingPos[1] + j);
-							flag = false;
-						}
-					}
-				}
-				if (flag)
-				{
-					cout << kingPos;
-					this->_turn = tmpTurn;
-					return false;
-				}
+				this->_turn = tmpTurn;
+				return false;
 			}
 		}
 	}
