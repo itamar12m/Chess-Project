@@ -81,7 +81,7 @@ codes Pawn::checkValid(string indexes)
 			return VALID_MOVE;
 		}
 	}
-	else if (isCapture(indexes))
+	if (isCapture(indexes))
 	{
 		flag = VALID_MOVE;
 	}
