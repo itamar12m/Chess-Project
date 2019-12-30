@@ -245,15 +245,17 @@ bool Board::isCheck(color turn)
 bool Board::isMate(color turn)
 {
 	color tmpTurn = this->_turn;
+	bool flag;
 	this->_turn = turn == WHITE ? BLACK : WHITE;
 	string kingPos = (turn == WHITE ? this->_whiteKing : this->_blackKing);
 	for (char i = 'a'; i <= 'h'; i++)
 	{
 		for (char j = '1'; j <= '8'; j++)
 		{
-			for (char k = 'a'; k <= 'h'; k++)
+			flag = true;
+			for (char k = 'a'; k <= 'h' & flag; k++)
 			{
-				for (char l = '1'; l <= '8'; l++)
+				for (char l = '1'; l <= '8' & flag; l++)
 				{
 					if (this->getPiece(i, j) != nullptr && this->getPiece(i, j)->getColor() != turn)
 					{
@@ -262,6 +264,10 @@ bool Board::isMate(color turn)
 							this->_turn = tmpTurn;
 							return false;
 						}
+					}
+					else
+					{
+						flag = false;
 					}
 				}
 			}
