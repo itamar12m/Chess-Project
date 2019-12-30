@@ -1,6 +1,6 @@
 #include "Queen.h"
 
-Queen::Queen(bool color, Board* board) : Piece(color, board)
+Queen::Queen(color color, Board* board) : Piece(color, board)
 {
 }
 

@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-Knight::Knight(bool color, Board* board) : Piece(color, board)
+Knight::Knight(color color, Board* board) : Piece(color, board)
 {
 }
 

@@ -15,6 +15,11 @@ INVALID_SAME_DST_SRC,
 VALID_MATE
 };
 
+enum color
+{
+	WHITE,
+	BLACK
+};
 using std::string;
 
 class Board;
@@ -22,14 +27,14 @@ class Board;
 class Piece
 {
 public:
-	Piece(bool color, Board* board);
+	Piece(color color, Board* board);
 	virtual codes checkValid(string indexes) = 0;
-	bool getColor();
+	color getColor();
 	virtual ~Piece();
 
 protected:
 	codes checkWayForRook(string indexes);
 	codes checkWayForBishop(string indexes);
-	bool _color;
+	color _color;
 	Board* _board;
 };
