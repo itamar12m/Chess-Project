@@ -126,6 +126,22 @@ codes Board::move(string indexes)
 	if (code == CASTLING_MOVE)
 	{
 		code = this->castling(indexes);
+		if (code == VALID_MOVE)
+		{
+			this->_p.close();
+			system("taskkill /IM ChessGraphics.exe");
+			system("Start ChessGraphics.exe");
+			Sleep(1000);
+			if (!_p.connect())
+			{
+				cout << "Can't connect to the game!\n";
+				throw exception();
+			}
+			this->_p.sendMessageToGraphics(this->makeBoardStr(this->_turn == WHITE ? BLACK : WHITE).c_str());
+			indexes = this->_p.getMessageFromGraphics();
+			this->changeTurn();
+			code = this->checkValid(indexes);
+		}
 	}
 	if (code != VALID_MOVE)
 	{
@@ -282,16 +298,6 @@ codes Board::castling(string indexes)
 		this->getPiece('f', indexes[1]) = this->getPiece('h', indexes[1]);
 		this->getPiece('h', indexes[1]) = nullptr;
 	}
-	this->_p.close();
-	system("taskkill /IM ChessGraphics.exe");
-	system("Start ChessGraphics.exe");
-	Sleep(1000);
-	if (!_p.connect())
-	{
-		cout << "Can't connect to the game!\n";
-	}
-	this->_p.sendMessageToGraphics(this->makeBoardStr(this->_turn == WHITE ? BLACK : WHITE).c_str());
-	this->_p.getMessageFromGraphics();
 	return VALID_MOVE;
 }
 
