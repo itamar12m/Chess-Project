@@ -60,7 +60,7 @@ void Pawn::promotion(string indexes)
 	default:
 		break;
 	}
-
+	
 }
 
 Pawn::Pawn(color color, Board* board) : Piece(color, board)
