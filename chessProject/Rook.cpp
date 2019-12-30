@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-Rook::Rook(bool color, Board* board) : Piece(color, board)
+Rook::Rook(color color, Board* board) : Piece(color, board)
 {
 }
 

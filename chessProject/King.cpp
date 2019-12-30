@@ -1,6 +1,6 @@
 #include "King.h"
 
-King::King(bool color, Board* board) : Piece(color, board)
+King::King(color color, Board* board) : Piece(color, board)
 {
 	this->_board->setKingPosition("e8", BLACK);
 	this->_board->setKingPosition("e1", WHITE);

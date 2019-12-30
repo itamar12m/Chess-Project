@@ -1,6 +1,6 @@
 #include "Bishop.h"
 
-Bishop::Bishop(bool color, Board* board) : Piece(color, board)
+Bishop::Bishop(color color, Board* board) : Piece(color, board)
 {
 }
 
