@@ -1,9 +1,10 @@
-#include "King.h"
+﻿#include "King.h"
 
 King::King(color color, Board* board) : Piece(color, board)
 {
 	this->_board->setKingPosition("e8", BLACK);
 	this->_board->setKingPosition("e1", WHITE);
+	this->_type = 'K';
 }
 
 codes King::checkValid(string indexes)
@@ -14,6 +15,10 @@ codes King::checkValid(string indexes)
 	{
 		this->_board->setKingPosition(indexes.substr(2, 2), this->_board->getPiece(indexes[0], indexes[1])->getColor());
 		return VALID_MOVE;
+	}
+	else
+	{
+		return CASTLING_MOVE;
 	}
 	return INVALID_PIECE_MOVE;
 }

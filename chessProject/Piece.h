@@ -12,7 +12,8 @@ INVALID_SELF_CHECK_MOVE,
 INVALID_WRONG_INDEX,
 INVALID_PIECE_MOVE,
 INVALID_SAME_DST_SRC,
-VALID_MATE
+VALID_MATE,
+CASTLING_MOVE
 };
 
 enum color
@@ -20,8 +21,8 @@ enum color
 	WHITE,
 	BLACK
 };
-using std::string;
 
+using std::string;
 class Board;
 
 class Piece
@@ -31,10 +32,12 @@ public:
 	virtual codes checkValid(string indexes) = 0;
 	color getColor();
 	virtual ~Piece();
+	char getType();
 
 protected:
 	codes checkWayForRook(string indexes);
 	codes checkWayForBishop(string indexes);
 	color _color;
 	Board* _board;
+	char _type; // always will be a capital letter
 };

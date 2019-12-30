@@ -2,6 +2,7 @@
 
 Rook::Rook(color color, Board* board) : Piece(color, board)
 {
+	this->_type = 'R';
 }
 
 codes Rook::checkValid(string indexes)

@@ -2,6 +2,7 @@
 
 Knight::Knight(color color, Board* board) : Piece(color, board)
 {
+	this->_type = 'N';
 }
 
 codes Knight::checkValid(string indexes)

@@ -2,6 +2,7 @@
 
 Bishop::Bishop(color color, Board* board) : Piece(color, board)
 {
+	this->_type = 'B';
 }
 
 codes Bishop::checkValid(string indexes)

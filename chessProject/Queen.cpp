@@ -2,6 +2,7 @@
 
 Queen::Queen(color color, Board* board) : Piece(color, board)
 {
+	this->_type = 'Q';
 }
 
 codes Queen::checkValid(string indexes)

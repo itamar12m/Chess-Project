@@ -62,6 +62,7 @@ void Pawn::promotion(string indexes)
 
 Pawn::Pawn(color color, Board* board) : Piece(color, board)
 {
+	this->_type = 'P';
 }
 
 codes Pawn::checkValid(string indexes)

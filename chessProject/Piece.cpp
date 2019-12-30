@@ -58,3 +58,8 @@ codes Piece::checkWayForBishop(string indexes)
 Piece::~Piece()
 {
 }
+
+char Piece::getType()
+{
+	return _type;
+}
