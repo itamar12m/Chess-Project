@@ -225,6 +225,7 @@ bool Board::isCheck(color turn)
 {
 	color tmpTurn = this->_turn;
 	this->_turn = turn == WHITE ? BLACK : WHITE;
+	Pawn::_whoCall = true;
 	for (char i = 'a'; i <= 'h'; i++)
 	{
 		for (char j = '1'; j <= '8'; j++)
@@ -237,6 +238,7 @@ bool Board::isCheck(color turn)
 			}
 		}
 	}
+	Pawn::_whoCall = false;
 	this->_turn = tmpTurn;
 	return false;
 }

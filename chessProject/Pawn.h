@@ -12,4 +12,7 @@ private:
 public:
 	Pawn(color color, Board* board);
 	virtual codes checkValid(string indexes);
+
+	//fields:
+	static bool _whoCall; //true - isCheck, false - other
 };
