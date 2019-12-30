@@ -159,7 +159,7 @@ codes Board::move(string indexes)
 		return VALID_CHECK_MOVE;
 	}
 	this->changeTurn();
-	printBoard();
+	cout << _blackKing << ' ' << _whiteKing << endl;
 	return code;
 }
 
@@ -190,12 +190,12 @@ codes Board::checkBasicValid(string indexes)
 
 codes Board::checkValid(string indexes)
 {
+	string tmpKingPos = this->getPiece(indexes[0], indexes[1])->getColor() == WHITE ? this->_whiteKing : this->_blackKing;
 	codes code = checkBasicValid(indexes);
 	if (code != VALID_MOVE)
 	{
 		return code;
 	}
-	string tmpKingPos = this->getPiece(indexes[0], indexes[1])->getColor() == WHITE ? this->_whiteKing : this->_blackKing;
 	code = this->getPiece(indexes[0], indexes[1])->checkValid(indexes);
 	Piece* copy;
 	if (code == VALID_MOVE) // then move the piece
