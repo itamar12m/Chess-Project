@@ -1,7 +1,5 @@
 #include "Pawn.h"
 
-bool Pawn::_whoCall = false;
-
 bool Pawn::checkFirst(string indexes)
 {
 	if (indexes[1] == '7' && _color == BLACK || (indexes[1] == '2' && _color == WHITE))
@@ -35,34 +33,6 @@ int Pawn::checkWayForPawn(string indexes)
 	return true;
 }
 
-void Pawn::promotion(string indexes)
-{
-	char choose;
-	//delete _board->getPiece(indexes[2], indexes[3]);
-	_board->getPiece(indexes[2], indexes[3]) = _board->getPiece(indexes[0], indexes[1]);
-	cout << "What do you want to replace the pawn with?" << endl <<
-		"(q - queen, r - rook, b - bishop, n - knight)" << endl;
-	cin >> choose;
-	switch (choose)
-	{
-	case 'r':
-		_board->getPiece(indexes[0], indexes[1]) = new Rook(_color, _board);
-		break;
-	case 'n':
-		_board->getPiece(indexes[0], indexes[1]) = new Knight(_color, _board);
-		break;
-	case 'b':
-		_board->getPiece(indexes[0], indexes[1]) = new Bishop(_color, _board);
-		break;
-	case 'q':
-		_board->getPiece(indexes[0], indexes[1]) = new Queen(_color, _board);
-		break;
-	default:
-		break;
-	}
-	
-}
-
 Pawn::Pawn(color color, Board* board) : Piece(color, board)
 {
 	this->_type = 'P';
@@ -93,11 +63,6 @@ codes Pawn::checkValid(string indexes)
 	else
 	{
 		return INVALID_PIECE_MOVE;
-	}
-	if ((flag == VALID_MOVE) && !(Pawn::_whoCall) &&
-		((_color == WHITE && indexes[3] == '8') || (_color == BLACK && indexes[3] == '1')))
-	{
-		promotion(indexes);
 	}
 	return flag;
 }
