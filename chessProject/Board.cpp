@@ -3,7 +3,8 @@
 Board::Board()
 {
 	this->_turn = WHITE;
-	string boardStr = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
+	//string boardStr = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
+	string boardStr = "rnbqkbnrpp###################################p##############K###0";
 	for (size_t i = 0; i < 8; i++)
 	{
 		for (size_t j = 0; j < 8; j++)
@@ -73,7 +74,7 @@ void Board::printBoard()
 			}
 			else
 			{
-				cout << "x ";
+				cout << this->_board[i][j]->getType() << ' ';
 			}
 		}
 		cout << endl;
@@ -147,6 +148,12 @@ codes Board::move(string indexes)
 	{
 		return code;
 	}
+	if (this->getPiece(indexes[0], indexes[1]) != nullptr &&
+		this->getPiece(indexes[0], indexes[1])->getType() == 'P' &&
+		(indexes[3] == '8' && this->_turn == WHITE || indexes[3] == '1' && this->_turn == BLACK))
+	{
+		indexes = this->promotion(indexes);
+	}
 	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
 	this->getPiece(indexes[0], indexes[1]) = nullptr;
 	if (this->isCheck(this->_turn == WHITE ? BLACK : WHITE)) // check on the other player
@@ -159,7 +166,7 @@ codes Board::move(string indexes)
 		return VALID_CHECK_MOVE;
 	}
 	this->changeTurn();
-	cout << _blackKing << ' ' << _whiteKing << endl;
+	this->printBoard();
 	return code;
 }
 
@@ -198,12 +205,6 @@ codes Board::checkValid(string indexes)
 		return code;
 	}
 	code = this->getPiece(indexes[0], indexes[1])->checkValid(indexes);
-	if (code == VALID_MOVE && this->getPiece(indexes[0], indexes[1]) != nullptr &&
-		this->getPiece(indexes[0], indexes[1])->getType() == 'P' &&
-		(indexes[3] == '8' && this->_turn == WHITE || indexes[3] == '1' && this->_turn == BLACK))
-	{
-		code = this->promotion(indexes);
-	}
 	Piece* copy;
 	if (code == VALID_MOVE) // then move the piece
 	{
@@ -334,14 +335,15 @@ string Board::makeBoardStr(color turn)
 	return boardStr;
 }
 
-codes Board::promotion(string indexes)
+string Board::promotion(string indexes)
 {
 	char choose = '0';
 	codes code;
-	this->getPiece(indexes[2], indexes[3]) = this->getPiece(indexes[0], indexes[1]);
-	this->getPiece(indexes[0], indexes[1]) = nullptr;
+	color color = this->getPiece(indexes[0], indexes[1])->getColor();
 	this->_p.close();
 	system("taskkill /IM ChessGraphics.exe");
+	delete this->getPiece(indexes[0], indexes[1]);
+	this->getPiece(indexes[0], indexes[1]) = nullptr;
 	cout << "What do you want to replace the pawn with?" << endl <<
 		"(q - queen, r - rook, b - bishop, n - knight)" << endl;
 	while (choose != 'r' && choose != 'n' && choose != 'b' && choose != 'q')
@@ -350,16 +352,16 @@ codes Board::promotion(string indexes)
 		switch (choose)
 		{
 		case 'r':
-			this->getPiece(indexes[2], indexes[3]) = new Rook(this->getPiece(indexes[2], indexes[3])->getColor(), this);
+			this->getPiece(indexes[2], indexes[3]) = new Rook(color, this);
 			break;
 		case 'n':
-			this->getPiece(indexes[2], indexes[3]) = new Knight(this->getPiece(indexes[2], indexes[3])->getColor(), this);
+			this->getPiece(indexes[2], indexes[3]) = new Knight(color, this);
 			break;
 		case 'b':
-			this->getPiece(indexes[2], indexes[3]) = new Bishop(this->getPiece(indexes[2], indexes[3])->getColor(), this);
+			this->getPiece(indexes[2], indexes[3]) = new Bishop(color, this);
 			break;
 		case 'q':
-			this->getPiece(indexes[2], indexes[3]) = new Queen(this->getPiece(indexes[2], indexes[3])->getColor(), this);
+			this->getPiece(indexes[2], indexes[3]) = new Queen(color, this);
 			break;
 		default:
 			cout << "wrong choice.\nplease try again: ";
@@ -376,7 +378,7 @@ codes Board::promotion(string indexes)
 	this->_p.sendMessageToGraphics(this->makeBoardStr(this->_turn == WHITE ? BLACK : WHITE).c_str());
 	indexes = this->_p.getMessageFromGraphics();
 	this->changeTurn();
-	return this->checkValid(indexes);
+	return indexes;
 }
 
 Board::~Board()

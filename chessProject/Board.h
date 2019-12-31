@@ -34,7 +34,7 @@ public:
 	bool isCheck(color color);
 	bool isMate(color turn);
 	codes castling(string indexes);
-	codes promotion(string indexes);
+	string promotion(string indexes);
 	string makeBoardStr(color turn);
 	~Board();
 };
