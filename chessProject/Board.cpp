@@ -3,8 +3,7 @@
 Board::Board()
 {
 	this->_turn = WHITE;
-	//string boardStr = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
-	string boardStr = "rnbqkbnrpp###################################p##############K###0";
+	string boardStr = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
 	for (size_t i = 0; i < 8; i++)
 	{
 		for (size_t j = 0; j < 8; j++)
