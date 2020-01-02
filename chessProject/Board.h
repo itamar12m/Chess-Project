@@ -21,7 +21,6 @@ private:
 	string _blackKing;
 public:
 	Board();
-	void printBoard();
 	codes checkValid(string indexes);
 	codes checkBasicValid(string indexes);
 	bool getTurn() const;

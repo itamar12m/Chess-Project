@@ -57,28 +57,9 @@ Board::Board()
 	if (!_p.connect())
 	{
 		cout << "Can't connect to the game!\n";
+		exit(EXIT_FAILURE);
 	}
 	this->_p.sendMessageToGraphics(boardStr.c_str());
-}
-
-void Board::printBoard()
-{
-	for (size_t i = 0; i < 8; i++)
-	{
-		for (size_t j = 0; j < 8; j++)
-		{
-			if (this->_board[i][j] == nullptr)
-			{
-				cout << "- ";
-			}
-			else
-			{
-				cout << this->_board[i][j]->getType() << ' ';
-			}
-		}
-		cout << endl;
-	}
-	cout << endl << endl;
 }
 
 string Board::getMessageFromGraphics()
@@ -135,7 +116,7 @@ codes Board::move(string indexes)
 			if (!_p.connect())
 			{
 				cout << "Can't connect to the game!\n";
-				throw exception();
+				exit(EXIT_FAILURE);
 			}
 			this->_p.sendMessageToGraphics(this->makeBoardStr(this->_turn == WHITE ? BLACK : WHITE).c_str());
 			indexes = this->_p.getMessageFromGraphics();
@@ -147,8 +128,7 @@ codes Board::move(string indexes)
 	{
 		return code;
 	}
-	if (this->getPiece(indexes[0], indexes[1]) != nullptr &&
-		this->getPiece(indexes[0], indexes[1])->getType() == 'P' &&
+	if (this->getPiece(indexes[0], indexes[1])->getType() == 'P' &&
 		(indexes[3] == '8' && this->_turn == WHITE || indexes[3] == '1' && this->_turn == BLACK))
 	{
 		indexes = this->promotion(indexes);
@@ -165,7 +145,6 @@ codes Board::move(string indexes)
 		return VALID_CHECK_MOVE;
 	}
 	this->changeTurn();
-	this->printBoard();
 	return code;
 }
 
@@ -373,7 +352,7 @@ string Board::promotion(string indexes)
 	if (!_p.connect())
 	{
 		cout << "Can't connect to the game!\n";
-		throw exception();
+		exit(EXIT_FAILURE);
 	}
 	this->_p.sendMessageToGraphics(this->makeBoardStr(this->_turn == WHITE ? BLACK : WHITE).c_str());
 	indexes = this->_p.getMessageFromGraphics();
