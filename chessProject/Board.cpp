@@ -309,6 +309,7 @@ codes Board::castling(string indexes)
 		this->getPiece('f', indexes[1]) = this->getPiece('h', indexes[1]);
 		this->getPiece('h', indexes[1]) = nullptr;
 	}
+	indexes[1] == '1' ? this->_whiteKing = indexes.substr(2, 2) : this->_blackKing = indexes.substr(2, 0);
 	return VALID_MOVE;
 }
 
