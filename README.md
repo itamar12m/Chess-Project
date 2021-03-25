@@ -1,5 +1,5 @@
 # Chess-Project
 Magshimim second year project.
 
-#About
+# About
 Chess game backend engine, written in C++.
